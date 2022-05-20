@@ -52,5 +52,3 @@ Adicionalmente, se expondrá el programa y cada integrante deberá demostrar que
 Las explicaciones deben ser puntuales y técnicamente fundamentadas, para lo cual es fundamental conocer la teoría explicada en clase.
 
 Solo se pueden utilizar para la elaboración del programa las sentencias que se han revisado en clase. De preferencia, debe realizar el programa en un solo archivo “.java”.
-
-A cualquier proyecto que incurra en alguna causal de deshonestidad académica le será adjudicada la mínima calificación.
