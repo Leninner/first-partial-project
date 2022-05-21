@@ -39,6 +39,14 @@ Elaborar un programa que contenga un menú con 4 opciones, de acuerdo al siguien
 
 - **Opción 3:** Aplicación de un tema libre a su elección, el cual será valorado de acuerdo a la originalidad, esfuerzo realizado en el mismo y uso de estructuras revisadas en clase (Similar a la Opción 2)
 
+  - Opciones
+    - Sistema de calificaciones
+    - Sistema de logística de productos
+    - Sistema de inventario
+    - Sistema de ventas
+    - Sistema de facturación
+    - Sistema de control de ligas deportivas
+
 - **Opción 4:** Salir.
 
 En todas las opciones, al terminarla, se deberá preguntar al usuario si desea ejecutar esa opción otra vez o no, en caso de querer salir debe regresar al menú principal de opciones.
