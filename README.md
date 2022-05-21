@@ -1,11 +1,14 @@
+# Proyecto del Primer Parcial de Algorítmos y Lógica de Programación
+
 <h2>Índice</h2>
 
-- [Overview](#overview)
-- [Project Specifications](#project-specifications)
-- [Getting Started](#getting-started)
-- [Folder Structure](#folder-structure)
-- [Dependency Management](#dependency-management)
-- [Acknoledgements](#acknoledgements)
+- [Proyecto del Primer Parcial de Algorítmos y Lógica de Programación](#proyecto-del-primer-parcial-de-algorítmos-y-lógica-de-programación)
+  - [Overview](#overview)
+  - [Project Specifications](#project-specifications)
+  - [Getting Started](#getting-started)
+  - [Folder Structure](#folder-structure)
+  - [Dependency Management](#dependency-management)
+  - [Acknoledgements](#acknoledgements)
 
 ## Overview
 
