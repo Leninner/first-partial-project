@@ -1,21 +1,15 @@
-## Getting Started
+<h2>Índice</h2>
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+- [Overview](#overview)
+- [Project Specifications](#project-specifications)
+- [Getting Started](#getting-started)
+- [Folder Structure](#folder-structure)
+- [Dependency Management](#dependency-management)
+- [Acknoledgements](#acknoledgements)
 
-## Folder Structure
+## Overview
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Este proyecto es una aplicación que servirá como proyecto del primer parcial de la materia de Programación
 
 ## Project Specifications
 
@@ -60,3 +54,36 @@ Adicionalmente, se expondrá el programa y cada integrante deberá demostrar que
 Las explicaciones deben ser puntuales y técnicamente fundamentadas, para lo cual es fundamental conocer la teoría explicada en clase.
 
 Solo se pueden utilizar para la elaboración del programa las sentencias que se han revisado en clase. De preferencia, debe realizar el programa en un solo archivo “.java”.
+
+## Getting Started
+
+Si quiéres ejecutar el programa en tu entorno local, necesitas tener instalado el siguiente software:
+
+- [JDK en su última versión](https://www.oracle.com/java/technologies/downloads/)
+- [Git](https://git-scm.com/downloads)
+- Cualquier IDE que tengas instalado en tu computadora, nosotros preferimos [Visual Studio Code](https://code.visualstudio.com/download)
+
+Clona el repositorio de GitHub con el siguiente comando:
+
+```bash
+git clone https://github.com/Leninner/first-partial-project
+```
+
+Luego, compila el proyecto y mira la magia 🌟🌟
+
+## Folder Structure
+
+The workspace contains two folders by default, where:
+
+- `src`: the folder to maintain sources
+- `lib`: the folder to maintain dependencies
+
+Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+
+## Dependency Management
+
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+## Acknoledgements
+
+- [Cómo utilizar JOptionPane.showConfirmDialog() en Java](https://www.youtube.com/watch?v=GwjUKVeVtCo&ab_channel=FredyGeek)
