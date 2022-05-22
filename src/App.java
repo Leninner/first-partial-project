@@ -2,37 +2,39 @@ import javax.swing.JOptionPane;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        char option;
+        char userMainOption;
         boolean exit = false;
 
         do {
-            option = JOptionPane
+            userMainOption = JOptionPane
                     .showInputDialog(
                             "¿Qué quieres hacer hoy?\n1. Métodos de Strings\n2. Restar\n3. Multiplicar\n4. Salir")
                     .charAt(0);
 
-            int reDo = 0;
+            int isAgain = 0;
 
-            while (reDo == 0 && option != '4') {
-                switch (option) {
+            while (isAgain == 0 && userMainOption != '4') {
+                switch (userMainOption) {
                     case '1':
                         new App().showStringMethods();
                         break;
 
                     default:
                         JOptionPane.showMessageDialog(null, "Opción no  válida, vuelve a intentarlo");
-                        reDo = 1;
-                        // Se hace uso de continue para que no me vuelva a preguntar si deseo repetir la
+                        isAgain = 1;
+                        // Se hace uso de `continue` para que no me vuelva a preguntar si deseo repetir
+                        // la
                         // opción
                         continue;
                 }
 
-                reDo = JOptionPane.showConfirmDialog(null, "Quiéres volver a repetir el proceso?", "",
+                isAgain = JOptionPane.showConfirmDialog(null, "¿Quiéres volver a repetir esta opción?",
+                        "Confirmación de repetición",
                         JOptionPane.YES_NO_OPTION);
             }
 
             // Controles para comprobar si el usuario quiere salir del menú principal o no
-            if (option == '4') {
+            if (userMainOption == '4') {
                 int exitOption = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir?", "",
                         JOptionPane.YES_NO_OPTION);
                 exit = exitOption == JOptionPane.YES_OPTION;
