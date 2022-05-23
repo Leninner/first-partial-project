@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 import javax.swing.JOptionPane;
 
 public class App {
@@ -86,7 +88,31 @@ public class App {
     // Option 2:
 
     void manageBusTicketSales() {
-        JOptionPane.showMessageDialog(null, "Leninsin, opción 2");
+        LocalDateTime horaActual = LocalDateTime.now();
+
+        int confirmSale = JOptionPane.showConfirmDialog(null,
+                "¿Quieres vender un boleto de bus?\n" + "Hora actual: " + horaActual.toString(), "",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmSale == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Venta realizada");
+            LocalDateTime horaDeVenta = LocalDateTime.now();
+
+            // JOptionPane.showMessageDialog(null, "Hora de venta: " +
+            // horaDeVenta.toString());
+
+            // Encontrar la resta entre las dos horas en minutos y segundos
+            long seconds = horaActual.until(horaDeVenta, java.time.temporal.ChronoUnit.SECONDS);
+            long minutes = horaActual.until(horaDeVenta, java.time.temporal.ChronoUnit.MINUTES);
+            long hours = horaActual.until(horaDeVenta, java.time.temporal.ChronoUnit.HOURS);
+
+            JOptionPane.showMessageDialog(null, "Tiempo de espera: " + (hours % 24) + " horas, " + (minutes % 60)
+                    + " minutos y " + (seconds % 60) + " segundos");
+        }
+
+        System.out.println("Hora actual: " + horaActual);
+
+        // JOptionPane.showMessageDialog(null, "Leninsin, opción 2");
     }
 
     // Option 3:
