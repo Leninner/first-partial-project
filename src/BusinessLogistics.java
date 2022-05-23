@@ -104,50 +104,41 @@ public class BusinessLogistics {
     do {
       // Petición de datos del cliente junto con validaciones
 
-      // do {
-      // customerName = JOptionPane.showInputDialog("Ingrese el nombre del
-      // comprador");
+      do {
+        customerName = JOptionPane.showInputDialog("Ingrese el nombre del comprador");
 
-      // if (!customerName.matches(regexName)) {
-      // JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
-      // }
-      // } while (customerName.matches(regexName) == false);
+        if (!customerName.matches(regexName)) {
+          JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
+        }
+      } while (customerName.matches(regexName) == false);
 
-      // do {
-      // customerId = JOptionPane.showInputDialog("Ingrese el numero de cedula del
-      // comprador");
+      do {
+        customerId = JOptionPane.showInputDialog("Ingrese el numero de cedula del comprador");
 
-      // if (!customerId.matches(regexCedula)) {
-      // JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo
-      // numeros");
-      // }
-      // } while (customerId.matches(regexCedula) == false);
+        if (!customerId.matches(regexCedula)) {
+          JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo numeros");
+        }
+      } while (customerId.matches(regexCedula) == false);
 
-      // do {
-      // shippingDestination = JOptionPane.showInputDialog("Ingrese el destino del
-      // paquete");
+      do {
+        shippingDestination = JOptionPane.showInputDialog("Ingrese el destino del paquete");
 
-      // if (shippingDestination.trim().isEmpty()) {
-      // JOptionPane.showMessageDialog(null, "El destino no puede estar vacio");
-      // }
-      // } while (shippingDestination.trim().isEmpty());
+        if (shippingDestination.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El destino no puede estar vacio");
+        }
+      } while (shippingDestination.trim().isEmpty());
 
-      // customerPhone = JOptionPane.showInputDialog("Ingrese el numero de telefono
-      // del comprador");
-      // customerEmail = JOptionPane.showInputDialog("Ingrese el correo electronico
-      // del comprador");
-      // storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el
-      // paquete");
+      customerPhone = JOptionPane.showInputDialog("Ingrese el numero de telefono del comprador");
+      customerEmail = JOptionPane.showInputDialog("Ingrese el correo electronico del comprador");
+      storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el paquete");
 
-      // do {
-      // purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del
-      // paquete");
+      do {
+        purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del paquete");
 
-      // if (!purchaseDate.matches(regexDate)) {
-      // JOptionPane.showMessageDialog(null, "La fecha debe tener el formato
-      // YYYY-MM-DD");
-      // }
-      // } while (purchaseDate.matches(regexDate) == false);
+        if (!purchaseDate.matches(regexDate)) {
+          JOptionPane.showMessageDialog(null, "La fecha debe tener el formato YYYY-MM-DD");
+        }
+      } while (purchaseDate.matches(regexDate) == false);
 
       boolean error = false;
 
