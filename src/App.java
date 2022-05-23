@@ -111,8 +111,6 @@ public class App {
         }
 
         System.out.println("Hora actual: " + horaActual);
-
-        // JOptionPane.showMessageDialog(null, "Leninsin, opción 2");
     }
 
     // Option 3:
