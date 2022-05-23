@@ -98,11 +98,10 @@ public class BusinessLogistics {
     String regexCedula = "^[0-9]*$";
     String regexDate = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
 
+    JOptionPane.showMessageDialog(null,
+        "Bienevenido al Sistema de Courier\nEmpezamos ingresando los datos del paquete");
+
     do {
-
-      JOptionPane.showMessageDialog(null,
-          "Bienevenido al Sistema de Courier\nEmpezamos ingresando los datos del paquete");
-
       // Petición de datos del cliente junto con validaciones
 
       do {
@@ -159,18 +158,20 @@ public class BusinessLogistics {
 
       do {
         productType = JOptionPane.showInputDialog("Ingrese el tipo de producto que tiene la carga");
-        shippingType = JOptionPane.showInputDialog("Ingrese el tipo de envio del paquete");
 
         if (productType.trim().isEmpty()) {
           JOptionPane.showMessageDialog(null, "El tipo de producto no puede estar vacio");
-          continue;
         }
+
+      } while (productType.trim().isEmpty() && shippingType.trim().isEmpty());
+
+      do {
+        shippingType = JOptionPane.showInputDialog("Ingrese el tipo de envio del paquete");
 
         if (shippingType.trim().isEmpty()) {
           JOptionPane.showMessageDialog(null, "El tipo de envio no puede estar vacio");
-          continue;
         }
-      } while (productType.trim().isEmpty() && shippingType.trim().isEmpty());
+      } while (shippingType.trim().isEmpty());
 
       totalPackages++;
 
