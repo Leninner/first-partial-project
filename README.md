@@ -90,3 +90,4 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 ## Acknoledgements
 
 - [Cómo utilizar JOptionPane.showConfirmDialog() en Java](https://www.youtube.com/watch?v=GwjUKVeVtCo&ab_channel=FredyGeek)
+- [Cómo crear un timer en Java](https://www.jc-mouse.net/java/contar-segundos-problema-resuelto)
