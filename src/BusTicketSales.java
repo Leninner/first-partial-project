@@ -9,6 +9,7 @@ public class BusTicketSales {
     //También se puede acceder a otros campos de fecha y hora, como día del año, día de la semana y semana del año. 
     //El tiempo se representa con una precisión de nanosegundos. Por ejemplo, el valor "2 de octubre de 2007 a las 13:45.30.123456789" 
     //se puede almacenar en LocalDateTime.
+    //Aqui estuvo el Andres.
 
     int confirmSale = JOptionPane.showConfirmDialog(null,
         "¿Quieres vender un boleto de bus?\n" + "Hora actual: " + purchaseStartTime.toString(), "",
