@@ -28,6 +28,6 @@ public class StringMethods {
      * .split(String regex)
      */
 
-    JOptionPane.showMessageDialog(null, "Leninsin");
+    JOptionPane.showMessageDialog(null, "Emilia");
   }
 }
