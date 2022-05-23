@@ -32,7 +32,7 @@ Elaborar un programa que contenga un menú con 4 opciones, de acuerdo al siguien
 
   - Al finalizar el proceso de compra del boleto se debe mostrar en pantalla la información del boleto (fecha de compra, fecha del viaje, destino, viajeros, etc.) y adicionalmente la siguiente información: subtotal, subtotal + IVA, descuentos, valor total.
 
-  - Mostrar el número de viajeros, el mayor descuento aplicado y el tiempo de compra expresada en minutos. Serecomienda utilizar printf para la impresión de resultados.
+  - Mostrar el número de viajeros, el mayor descuento aplicado y el tiempo de compra expresada en minutos. Se recomienda utilizar printf para la impresión de resultados.
 
 - **Opción 3:** Aplicación de un tema libre a su elección, el cual será valorado de acuerdo a la originalidad, esfuerzo realizado en el mismo y uso de estructuras revisadas en clase (Similar a la Opción 2)
 
