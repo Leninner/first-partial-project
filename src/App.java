@@ -8,7 +8,7 @@ public class App {
         do {
             userMainOption = JOptionPane
                     .showInputDialog(
-                            "¿Qué quieres hacer hoy?\n1. Métodos de Strings\n2. Restar\n3. Multiplicar\n4. Salir")
+                            "¿Qué quieres hacer hoy?\n1. Métodos de Strings\n2. Manejar la venta de boletos en un terminal de buses\n3. Manejar la logística de los productos de una empresa\n4. Salir")
                     .charAt(0);
 
             int isAgain = 0;
@@ -17,6 +17,13 @@ public class App {
                 switch (userMainOption) {
                     case '1':
                         new App().showStringMethods();
+                        break;
+                    case '2':
+                        new App().manageBusTicketSales();
+                        break;
+
+                    case '3':
+                        new App().manageBusinessLogistics();
                         break;
 
                     default:
@@ -78,6 +85,14 @@ public class App {
 
     // Option 2:
 
+    void manageBusTicketSales() {
+        JOptionPane.showMessageDialog(null, "Leninsin, opción 2");
+    }
+
     // Option 3:
+
+    void manageBusinessLogistics() {
+        JOptionPane.showMessageDialog(null, "Leninsin, opción 3");
+    }
 
 }
