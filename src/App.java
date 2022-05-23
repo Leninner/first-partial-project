@@ -17,7 +17,7 @@ public class App {
             while (isAgain == 0 && userMainOption != '4') {
                 switch (userMainOption) {
                     case '1':
-                        new App().showStringMethods();
+                        new StringMethods().showStringMethods();
                         break;
                     case '2':
                         new App().manageBusTicketSales();
@@ -48,38 +48,6 @@ public class App {
                 exit = exitOption == JOptionPane.YES_OPTION;
             }
         } while (!exit);
-    }
-
-    // Option 1:
-
-    void showStringMethods() {
-        /**
-         * TODO: Implementar un menú para que el usuario seleccione el método que desea
-         * utilizar y muestre la descripción del método junto a un ejemplo de su uso,
-         * haciendo uso de JOptionPane. El menú debe estar en un loop infinito hasta que
-         * el usuario seleccione
-         * la opción de salir.
-         * 
-         * Métodos de Strings:
-         * .charAt(int index)
-         * .compareTo(String str)
-         * .contains(String str)
-         * .endsWith(String str)
-         * .equals(String str)
-         * .equalsIgnoreCase(String str)
-         * .indexOf(String str)
-         * .lastIndexOf(String str)
-         * .length()
-         * .replace(String target, String replacement)
-         * .startsWith(String str)
-         * .substring(int beginIndex, int endIndex)
-         * .toLowerCase()
-         * .toUpperCase()
-         * .trim()
-         * .split(String regex)
-         */
-
-        JOptionPane.showMessageDialog(null, "Leninsin");
     }
 
     // Option 2:
