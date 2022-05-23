@@ -4,6 +4,11 @@ import javax.swing.JOptionPane;
 public class BusTicketSales {
   void manageBusTicketSales() {
     LocalDateTime purchaseStartTime = LocalDateTime.now();
+    //LocalDAteTime es un objeto que nos permite de fecha y hora inmutable que representa una fecha y hora, 
+    //a menudo visto como año-mes-día-hora-minuto-segundo. 
+    //También se puede acceder a otros campos de fecha y hora, como día del año, día de la semana y semana del año. 
+    //El tiempo se representa con una precisión de nanosegundos. Por ejemplo, el valor "2 de octubre de 2007 a las 13:45.30.123456789" 
+    //se puede almacenar en LocalDateTime.
 
     int confirmSale = JOptionPane.showConfirmDialog(null,
         "¿Quieres vender un boleto de bus?\n" + "Hora actual: " + purchaseStartTime.toString(), "",
