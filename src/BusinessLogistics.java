@@ -143,26 +143,33 @@ public class BusinessLogistics {
       boolean error = false;
 
       do {
-        weight = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso del paquete en kilogramos"));
 
-        if (weight <= 0) {
-          JOptionPane.showMessageDialog(null, "El peso debe ser mayor a 0 y no puede estar vacío");
-          continue;
-        }
+        do {
+          weight = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso del paquete en kilogramos"));
 
-        price = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del paquete"));
+          if (weight <= 0) {
+            JOptionPane.showMessageDialog(null, "El peso debe ser mayor a 0 y no puede estar vacío");
+            continue;
+          }
+        } while (weight <= 0);
 
-        if (price <= 0) {
-          JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
-          continue;
-        }
+        do {
+          price = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del paquete"));
 
-        productType = JOptionPane.showInputDialog("Ingrese el tipo de producto que tiene la carga");
+          if (price <= 0) {
+            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
+            continue;
+          }
+        } while (price <= 0);
 
-        if (productType.trim().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "El tipo de producto no puede estar vacio");
-          continue;
-        }
+        do {
+          productType = JOptionPane.showInputDialog("Ingrese el tipo de producto que tiene la carga");
+
+          if (productType.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El tipo de producto no puede estar vacio");
+            continue;
+          }
+        } while (productType.trim().isEmpty());
 
         shippingType = Integer
             .parseInt(
@@ -221,7 +228,7 @@ public class BusinessLogistics {
             break;
         }
 
-      } while (productType.trim().isEmpty() || error == true || price <= 0 || weight <= 0);
+      } while (error == true);
 
       totalPackages++;
 
