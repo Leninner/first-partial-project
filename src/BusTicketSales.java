@@ -13,14 +13,21 @@ public class BusTicketSales {
     // se puede almacenar en LocalDateTime.
 
     int travelers = 0, choose_option_travel = 0, reenterdata = 0;
+
     float total_price = 0, price_travel = 0, price_travel_discount = 0, discount_option1 = 0, discount_option2 = 0,
         discount_option3 = 0, discount_option4 = 0, discount_option5 = 0;
+
     float price_option1 = 2.50f, price_option2 = 1.50f, price_option3 = 3.80f, price_option4 = 3.60f,
         price_option5 = 3.00f, price_option6 = 4.30f, price_option7 = 1.80f, price_option8 = 3.50f;
+
     String option_travel1 = "Ambato --> Quito", option_travel2 = "Ambato --> Latacunga",
         option_travel3 = "Ambato --> Cuenca", option_travel4 = "Ambato --> Guayaquil";
     String option_travel5 = "Ambato --> Puyo", option_travel6 = "Ambato --> Loja",
         option_travel7 = "Ambato --> Riobamba", option_travel8 = "Ambato --> Tena";
+    
+    JOptionPane.showMessageDialog(null, "*****************************************************\n"+
+                                                        "* Bienvenido a la venta de boletos de autobús  *\n"+
+                                                        "*****************************************************");
     do {
       try {
         String date = JOptionPane.showInputDialog("Ingrese la fecha del viaje (dd/mm/aaaa)");
@@ -34,14 +41,17 @@ public class BusTicketSales {
           JOptionPane.showMessageDialog(null, "El dia ingresado no es valido");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la fecha del viaje?", "",
               JOptionPane.YES_NO_OPTION);
+              continue;
         } else if (month > 12 || month < 1) {
           JOptionPane.showMessageDialog(null, "El mes ingresado no es valido");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la fecha del viaje?", "",
               JOptionPane.YES_NO_OPTION);
+              continue;
         } else if (year > 2025 || year < 1) {
           JOptionPane.showMessageDialog(null, "El año ingresado no es valido");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la fecha del viaje?", "",
               JOptionPane.YES_NO_OPTION);
+              continue;
         } else if (year % 4 == 0 && month == 2 && day > 29) {
           JOptionPane.showMessageDialog(null, "El dia ingresado no es valido");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la fecha del viaje?", "",
@@ -55,6 +65,7 @@ public class BusTicketSales {
             JOptionPane.YES_NO_OPTION);
       }
     } while (reenterdata == JOptionPane.YES_OPTION);
+
     do {
       try {
         String time = JOptionPane.showInputDialog("Ingrese la hora del viaje (hh:mm)");
@@ -78,6 +89,7 @@ public class BusTicketSales {
         ;
       }
     } while (reenterdata == JOptionPane.YES_OPTION);
+
 
     LocalDateTime purchaseStartTime = LocalDateTime.now();
     String purchaseStartTimeString = purchaseStartTime.toString();
