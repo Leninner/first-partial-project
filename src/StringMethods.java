@@ -30,11 +30,11 @@ public class StringMethods {
      * .split(String regex)
      */
     do {
-      userMainOption =Integer.parseInt(JOptionPane.showInputDialog("Escoge el método que deseas utilizar\n1.charAt\n2.compareTo\n3.contains\n4.endsWith\n5.equals\n6.equalsIgnoreCase\n7.indexOf\n8.lastIndexOf\n9.length\n10.replace\n11.startsWith\n12.substring\n13.toLowwerCase\n14.toUpperCase\n15.trim\n16.split"));
+      userMainOption =Integer.parseInt(
+        JOptionPane.showInputDialog("Escoge el método que deseas utilizar\n1.charAt\n2.compareTo\n3.contains\n4.endsWith\n5.equals\n6.equalsIgnoreCase\n7.indexOf\n8.lastIndexOf\n9.length\n10.replace\n11.startsWith\n12.substring\n13.toLowwerCase\n14.toUpperCase\n15.trim\n16.split"));
       switch (userMainOption) {
         case 1:
         JOptionPane.showMessageDialog(null,"El método .charAt devuelve el carácter en el índice definido.\nEn este método, el valor del índice debe estar entre 0 y la longitud \nde la cadena menos 1");
-          
           break;
         case 2:
         JOptionPane.showMessageDialog(null, "El método compareTo se usa para realizar una ordenación natural\nen una cadena.Clasificación natural significa el orden de clasificación \nque se aplica al objeto, por ejemplo, orden léxico para Cadena,\n orden numérico para ordenar enteros, etc.");
@@ -46,49 +46,40 @@ public class StringMethods {
         JOptionPane.showMessageDialog(null, "");
           break;
         case 5:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 6:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 7:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 8:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 9:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 10:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 11:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 12:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 13:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
-      
         case 14:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
         case 15:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
         case 16:
-          
+        JOptionPane.showMessageDialog(null, "");
           break;
         case 17:
           exit = true;
