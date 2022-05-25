@@ -33,7 +33,8 @@ public class BusinessLogistics {
    * solicitado:
    * 
    * - Se debe controlar que el paquete esté en concordancia con el tipo de envío
-   * que se está aplicando.
+   * que se está aplicando. Si no es así, el sistema debe mostrar un mensaje y
+   * permitirle hacer un nuevo ingreso
    * 
    * - **Categoría A:** Documentos
    * Esta categoría está libre de impuestos y no requiere ningún documento de
@@ -92,9 +93,12 @@ public class BusinessLogistics {
     double price = 0;
     String productType = "";
     int shippingType = 0;
+    String packageCode = generatePackageCode();
 
     // Regex para validaciones
-    String regexName = "^[a-zA-Z]*$";
+    // regez para validar nombre y apellido del cliente que permita espacios
+    // entre palabras
+    String regexName = "^[a-zA-Z\\s]+$";
     String regexCedula = "^[0-9]*$";
     String regexDate = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
 
@@ -107,10 +111,16 @@ public class BusinessLogistics {
       do {
         customerName = JOptionPane.showInputDialog("Ingrese el nombre del comprador");
 
+        if (customerName.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+          continue;
+        }
+
         if (!customerName.matches(regexName)) {
           JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
+          continue;
         }
-      } while (customerName.matches(regexName) == false);
+      } while (customerName.matches(regexName) == false || customerName.trim().isEmpty());
 
       do {
         customerId = JOptionPane.showInputDialog("Ingrese el numero de cedula del comprador");
@@ -118,13 +128,17 @@ public class BusinessLogistics {
         if (!customerId.matches(regexCedula)) {
           JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo numeros");
         }
-      } while (customerId.matches(regexCedula) == false);
+
+        if (customerId.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El numero de cedula no puede estar vacío");
+        }
+      } while (customerId.matches(regexCedula) == false || customerId.trim().isEmpty());
 
       do {
         shippingDestination = JOptionPane.showInputDialog("Ingrese el destino del paquete");
 
         if (shippingDestination.trim().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "El destino no puede estar vacio");
+          JOptionPane.showMessageDialog(null, "El campo del destino no puede estar vacio");
         }
       } while (shippingDestination.trim().isEmpty());
 
@@ -232,6 +246,15 @@ public class BusinessLogistics {
 
       totalPackages++;
 
+      // TODO: Crear una forma de mostrar la factura con JOoptionPane
+
+      JOptionPane.showMessageDialog(null, "La factura del paquete es la siguiente:\n" + "Nombre del comprador: "
+          + customerName + "\nNumero de cedula: " + customerId + "\nE-mail: " + customerEmail + "\nTelefono: "
+          + customerPhone + "\nDestino del paquete: " + shippingDestination
+          + "\nPeso del paquete: " + (weight * 2.2) + " lbs\nPrecio del paquete: $" + price + "\nTipo de producto: "
+          + productType + "\nCategoria del paquete: " + shippingType + "\nFecha de compra: " + purchaseDate
+          + "\nCódigo de seguimiento: " + packageCode + "\n\n*** Gracias por su compra ***");
+
       int endOfWorkDay = JOptionPane.showConfirmDialog(null, "¿Deseas ingresar la información de otro paquete?",
           "Continuar", JOptionPane.YES_NO_OPTION);
 
@@ -251,5 +274,16 @@ public class BusinessLogistics {
         break;
       }
     } while (true);
+  }
+
+  String generatePackageCode() {
+    String packageCode = "";
+
+    for (int i = 0; i < 6; i++) {
+      int randomNumber = (int) (Math.random() * 10);
+      packageCode += randomNumber;
+    }
+
+    return packageCode;
   }
 }
