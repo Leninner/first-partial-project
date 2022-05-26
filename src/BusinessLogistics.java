@@ -307,7 +307,10 @@ public class BusinessLogistics {
         long hours = startWorkTime.until(endWorkTime, java.time.temporal.ChronoUnit.HOURS);
 
         JOptionPane.showMessageDialog(null,
-            "El tiempo total de trabajo es de: " + hours + " horas, " + minutes + " minutos y " + seconds + " segundos"
+            "El tiempo total de trabajo es de: "
+                + (hours % 24) + " horas, "
+                + (minutes % 60) + " minutos y "
+                + (seconds % 60) + " segundos"
                 + "\nEl total de paquetes aprovados es de: " + totalApprovedPackages
                 + "\nEl total de paquetes rechazados es de: " + totalRejectedPackages);
 
