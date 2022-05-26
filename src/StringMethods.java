@@ -105,7 +105,5 @@ public class StringMethods {
           break;
       }
     } while (!exit);
-
-    JOptionPane.showMessageDialog(null, "Emilia");
   }
 }
