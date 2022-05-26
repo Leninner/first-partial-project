@@ -1,71 +1,8 @@
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Hashtable;
-
 import javax.swing.JOptionPane;
 
 public class BusinessLogistics {
   /**
-   * Aplicación de Courier para gestionar los envíos de paquetes.
-   * 
-   * El sistema debe permitir la gestión de paquetes, que debe cumplir los
-   * siguientes requerimientos:
-   * 
-   * - El sistema de iniciar preguntando al encargado sobre los siguientes
-   * parámetros de cada paquete:
-   * 
-   * - Destino de envío
-   * - Peso de la carga, en Kg
-   * - Tienda que vende
-   * - Fecha de compra
-   * - Precio antes del envío
-   * - Tipo de productos que contiene (requerido)
-   * 
-   * - Información del comprador:
-   * 
-   * - Nombres y Apellidos (Requerido)
-   * - Cédula (Requerido)
-   * - Teléfono (Opcional)
-   * - Correo Electrónico (Opcional)
-   * 
-   * - Tipo de envío (Requerido)
-   * 
-   * - El sistema tiene que validar que todos los datos estén de acuerdo con lo
-   * solicitado:
-   * 
-   * - Se debe controlar que el paquete esté en concordancia con el tipo de envío
-   * que se está aplicando. Si no es así, el sistema debe mostrar un mensaje y
-   * permitirle hacer un nuevo ingreso
-   * 
-   * - **Categoría A:** Documentos
-   * Esta categoría está libre de impuestos y no requiere ningún documento de
-   * control previo a la importación.
-   * 
-   * - **Categoría B:** 4 x 4
-   * Son todos los paquetes que pesan hasta 4 kilogramos y hasta USD$400, usado
-   * únicamente por personas naturales.
-   * 
-   * - **Categoría C:** 50 Kg $2000
-   * Son todos los paquetes que pesan hasta 50 kilogramos y hasta USD $2.000 que
-   * no entren en ninguna otra categoría.
-   * Esta categoría si paga impuestos:
-   * - IVA: 12%
-   * - Fodinfa: 0.5%.
-   * 
-   * - **Categoría D:** Textiles y Calzados
-   * El precio no puede excederse a los 20 kg ni el valor sobrepasar los US$
-   * 2.000,00
-   * 
-   * Esta categoría paga estos impuestos:
-   * - Advalorem: 10%
-   * - Específico: $5.5 por cada Kg de ropa, en el caso de calzado $6,00 por cada
-   * par de zapato.|
-   * - IVA: 12%
-   * - Fodinfa: 0.5%
-   * 
-   * - El sistema debe retornar un mensaje de error en caso de que alguno de los
-   * datos no cumpla con lo solicitado y volver a solicitar el dato erroneo
-   * 
    * - El sistema debe generar un código de seguimiento que será un **código** de
    * 10 dígitos, el cual debe ser único.
    * 
@@ -80,20 +17,24 @@ public class BusinessLogistics {
    */
 
   void manageBusinessLogistics() {
+    final double IVA = 0.15, Fodinfa = 0.05, advalorem = 0.1, especifico = 5.5;
+
     LocalDateTime startWorkTime = LocalDateTime.now();
+
     int totalApprovedPackages = 0;
     int totalRejectedPackages = 0;
+    double weight = 0;
+    double price = 0;
+    int shippingType = 0;
+
     String customerName = "";
     String customerId = "";
     String shippingDestination = "";
     String customerPhone = "";
     String customerEmail = "";
-    double weight = 0;
     String storeName = "";
     String purchaseDate = "";
-    double price = 0;
     String productType = "";
-    int shippingType = 0;
     String packageCode = generatePackageCode();
 
     // Regex para validaciones
@@ -103,8 +44,6 @@ public class BusinessLogistics {
     String regexCedula = "^[0-9]*$";
     String regexDate = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
 
-    final double IVA = 0.15, Fodinfa = 0.05, advalorem = 0.1, especifico = 5.5;
-
     JOptionPane.showMessageDialog(null,
         "* * * * * * * * * * * * * * * * * * * * * * * * * * *"
             + "\nBienvenido al Sistema de envíos de Cool Courier\n"
@@ -112,66 +51,54 @@ public class BusinessLogistics {
 
     do {
       // Petición de datos del cliente junto con validaciones
-      // do {
-      // customerName = JOptionPane.showInputDialog("Ingrese el nombre del
-      // comprador");
+      do {
+        customerName = JOptionPane.showInputDialog("Ingrese el nombre del comprador");
 
-      // if (customerName.trim().isEmpty()) {
-      // JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
-      // continue;
-      // }
+        if (customerName.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+          continue;
+        }
 
-      // if (!customerName.matches(regexName)) {
-      // JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
-      // continue;
-      // }
-      // } while (customerName.matches(regexName) == false ||
-      // customerName.trim().isEmpty());
+        if (!customerName.matches(regexName)) {
+          JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
+          continue;
+        }
+      } while (customerName.matches(regexName) == false || customerName.trim().isEmpty());
 
-      // do {
-      // customerId = JOptionPane.showInputDialog("Ingrese el número de cédula del
-      // comprador");
+      do {
+        customerId = JOptionPane.showInputDialog("Ingrese el número de cédula del comprador");
 
-      // if (customerId.trim().isEmpty()) {
-      // JOptionPane.showMessageDialog(null, "El numero de cedula no puede estar
-      // vacío");
-      // continue;
-      // }
+        if (customerId.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El numero de cedula no puede estar vacío");
+          continue;
+        }
 
-      // if (!customerId.matches(regexCedula) || customerId.length() != 10) {
-      // JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo
-      // números. Y solo 10 dígitos");
-      // continue;
-      // }
+        if (!customerId.matches(regexCedula) || customerId.length() != 10) {
+          JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo números y solo 10 dígitos");
+          continue;
+        }
 
-      // } while (!customerId.matches(regexCedula) || customerId.trim().isEmpty());
+      } while (!customerId.matches(regexCedula) || customerId.trim().isEmpty() || customerId.length() != 10);
 
-      // do {
-      // shippingDestination = JOptionPane.showInputDialog("Ingrese el destino de
-      // envío del paquete");
+      do {
+        shippingDestination = JOptionPane.showInputDialog("Ingrese el destino de envío del paquete");
 
-      // if (shippingDestination.trim().isEmpty()) {
-      // JOptionPane.showMessageDialog(null, "El campo del destino de envío no puede
-      // estar vacio");
-      // }
-      // } while (shippingDestination.trim().isEmpty());
+        if (shippingDestination.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(null, "El campo del destino de envío no puede estar vacio");
+        }
+      } while (shippingDestination.trim().isEmpty());
 
-      // customerPhone = JOptionPane.showInputDialog("Ingrese el número de telefono
-      // del comprador");
-      // customerEmail = JOptionPane.showInputDialog("Ingrese el e-mail del
-      // comprador");
-      // storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el
-      // paquete");
+      customerPhone = JOptionPane.showInputDialog("Ingrese el número de telefono del comprador");
+      customerEmail = JOptionPane.showInputDialog("Ingrese el e-mail del comprador");
+      storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el paquete");
 
-      // do {
-      // purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del
-      // paquete (YYYY-MM-DD)");
+      do {
+        purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del paquete (YYYY-MM-DD)");
 
-      // if (!purchaseDate.matches(regexDate)) {
-      // JOptionPane.showMessageDialog(null, "La fecha debe tener el formato
-      // YYYY-MM-DD");
-      // }
-      // } while (!purchaseDate.matches(regexDate));
+        if (!purchaseDate.matches(regexDate)) {
+          JOptionPane.showMessageDialog(null, "La fecha debe tener el formato YYYY-MM-DD");
+        }
+      } while (!purchaseDate.matches(regexDate));
 
       boolean error = false;
 
@@ -286,7 +213,7 @@ public class BusinessLogistics {
                   JOptionPane.showMessageDialog(null,
                       "El paquete fue aprovado");
                   new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
-                      weight, price);
+                      weight, price, shippingDestination, customerPhone, customerEmail, storeName, purchaseDate);
 
                   totalApprovedPackages++;
                 }
@@ -307,7 +234,7 @@ public class BusinessLogistics {
                       "El paquete fue aprovado");
                   new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
                       weight,
-                      price);
+                      price, shippingDestination, customerPhone, customerEmail, storeName, purchaseDate);
 
                   totalApprovedPackages++;
                 }
@@ -329,7 +256,7 @@ public class BusinessLogistics {
                       "El paquete fue aprovado");
                   new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
                       weight,
-                      price, IVA, Fodinfa);
+                      price, IVA, Fodinfa, shippingDestination, customerPhone, customerEmail, storeName, purchaseDate);
 
                   totalApprovedPackages++;
                 }
@@ -359,7 +286,8 @@ public class BusinessLogistics {
                       "El paquete fue aprovado");
                   new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
                       weight,
-                      price, IVA, Fodinfa, advalorem, especifico);
+                      price, IVA, Fodinfa, advalorem, especifico, shippingDestination, customerPhone, customerEmail,
+                      storeName, purchaseDate);
 
                   totalApprovedPackages++;
                 }
@@ -389,11 +317,14 @@ public class BusinessLogistics {
       if (endOfWorkDay == JOptionPane.NO_OPTION) {
         LocalDateTime endWorkTime = LocalDateTime.now();
 
-        long totalTime = ChronoUnit.MINUTES.between(startWorkTime, endWorkTime);
+        long seconds = startWorkTime.until(endWorkTime, java.time.temporal.ChronoUnit.SECONDS);
+        long minutes = startWorkTime.until(endWorkTime, java.time.temporal.ChronoUnit.MINUTES);
+        long hours = startWorkTime.until(endWorkTime, java.time.temporal.ChronoUnit.HOURS);
 
         JOptionPane.showMessageDialog(null,
-            "El tiempo total de trabajo es de: " + totalTime + " minutos."
-                + "\nEl total de paquetes procesados es de: " + totalApprovedPackages + " paquetes.");
+            "El tiempo total de trabajo es de: " + hours + " horas, " + minutes + " minutos y " + seconds + " segundos"
+                + "\nEl total de paquetes aprovados es de: " + totalApprovedPackages
+                + "\nEl total de paquetes rechazados es de: " + totalRejectedPackages);
 
         break;
       }
@@ -413,18 +344,25 @@ public class BusinessLogistics {
 
   // Sobrecarga de métodos para controlar los parámetros opcionales
 
+  // shippingDestination, customerPhone, customerEmail, storeName, purchaseDate
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
-      double weight, double price) {
+      double weight, double price, String shippingDestination, String customerPhone, String customerEmail,
+      String storeName, String purchaseDate) {
 
     JOptionPane.showMessageDialog(null,
         "***  Factura  ***" + "\n\n"
             + "* * * * * * * * * * * * * * * * * * * * * * * * *"
             + "\nNombre: " + customerName
             + "\nCédula: " + customerId
+            + "\nTeléfono: " + customerPhone
+            + "\nCorreo: " + customerEmail
+            + "\nFecha de Compra: " + purchaseDate
             + "\n\nCódigo del paquete: " + packageCode
+            + "\nTienda: " + storeName
+            + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + weight + "kg"
+            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
             + "\n\nIVA: 0%"
             + "\nSubtotal: $" + (price)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
@@ -432,17 +370,24 @@ public class BusinessLogistics {
   }
 
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
-      double weight, double price, double IVA, double Fodinfa) {
+      double weight, double price, double IVA, double Fodinfa, String shippingDestination, String customerPhone,
+      String customerEmail,
+      String storeName, String purchaseDate) {
 
     JOptionPane.showMessageDialog(null,
         "***  Factura ***" + "\n\n"
             + "* * * * * * * * * * * * * * * * * * * * * * * * *"
             + "\nNombre: " + customerName
             + "\nCédula: " + customerId
+            + "\nTeléfono: " + customerPhone
+            + "\nCorreo: " + customerEmail
+            + "\nFecha de Compra: " + purchaseDate
             + "\n\nCódigo del paquete: " + packageCode
+            + "\nTienda: " + storeName
+            + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + weight + "kg"
+            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
             + "\n\nIVA: " + (IVA * 100) + "%"
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
             + "\nSubtotal: $" + (price)
@@ -451,17 +396,24 @@ public class BusinessLogistics {
   }
 
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
-      double weight, double price, double IVA, double Fodinfa, double advalorem, double especifico) {
+      double weight, double price, double IVA, double Fodinfa, double advalorem, double especifico,
+      String shippingDestination, String customerPhone, String customerEmail,
+      String storeName, String purchaseDate) {
 
     JOptionPane.showMessageDialog(null,
         "***  Factura ***" + "\n\n"
             + "* * * * * * * * * * * * * * * * * * * * * * * * *"
             + "\nNombre: " + customerName
             + "\nCédula: " + customerId
+            + "\nTeléfono: " + customerPhone
+            + "\nCorreo: " + customerEmail
+            + "\nFecha de Compra: " + purchaseDate
             + "\n\nCódigo del paquete: " + packageCode
+            + "\nTienda: " + storeName
+            + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + (weight * 2.2) + "lb"
+            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
             + "\n\nIVA: " + (IVA * 100) + "%"
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
             + "\nAdvalorem: " + (advalorem * 100) + "%"
