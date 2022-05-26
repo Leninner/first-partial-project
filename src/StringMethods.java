@@ -31,7 +31,7 @@ public class StringMethods {
      */
     do {
       userMainOption =Integer.parseInt(
-        JOptionPane.showInputDialog("Escoge el método que deseas utilizar\n1.charAt\n2.compareTo\n3.contains\n4.endsWith\n5.equals\n6.equalsIgnoreCase\n7.indexOf\n8.lastIndexOf\n9.length\n10.replace\n11.startsWith\n12.substring\n13.toLowwerCase\n14.toUpperCase\n15.trim\n16.split"));
+        JOptionPane.showInputDialog("Escoge el método que deseas utilizar\n1.charAt\n2.compareTo\n3.contains\n4.endsWith\n5.equals\n6.equalsIgnoreCase\n7.indexOf\n8.lastIndexOf\n9.length\n10.replace\n11.startsWith\n12.substring\n13.toLowerCase\n14.toUpperCase\n15.trim\n16.split\n17.Salir"));
       switch (userMainOption) {
         case 1:
         JOptionPane.showMessageDialog(null,"El método .charAt devuelve el carácter en el índice definido.\nEn este método, el valor del índice debe estar entre 0 y la longitud \nde la cadena menos 1");
@@ -43,13 +43,13 @@ public class StringMethods {
         JOptionPane.showMessageDialog(null, "El método contains es un método Java para verificar si String \ncontiene otra subcadena o no.Devuelve un valor booleano para que pueda\n usarse directamente dentro de sentencias if.");
           break;
         case 4:
-        JOptionPane.showMessageDialog(null, "");
+        JOptionPane.showMessageDialog(null, "El método endsWith se usa para verificar si la cadena termina \ncon la subcadena especificada por el usuario o no. En función de esta \ncomparación, devolverá booleano Verdadero o Falso.");
           break;
         case 5:
-        JOptionPane.showMessageDialog(null, "");
+        JOptionPane.showMessageDialog(null, "El método equals se utiliza para comparar dos objetos. Ojo no \nconfundir con el operador ==; se usa para saber si dos objetos son del \nmismo tipo y tienen los mismos datos. Nos dara el valor true si son\n iguales y false si no.");
           break;
         case 6:
-        JOptionPane.showMessageDialog(null, "");
+        JOptionPane.showMessageDialog(null, "El método equalsIgnoreCase compara dos strings para ver si son \niguales ignorando las diferencias entre mayúsculas y minúsculas. Este \nmétodo es necesario porque no es posible comparar strings usando el \noperador de igualdad (==). Retorna true si los strings son iguales y\n false si no lo son.");
           break;
         case 7:
         JOptionPane.showMessageDialog(null, "");
