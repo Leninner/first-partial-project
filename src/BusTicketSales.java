@@ -27,7 +27,8 @@ public class BusTicketSales {
     String date = "", time = "";
 
     Float price_option1 = 2.50f, price_option2 = 1.50f, price_option3 = 3.80f, price_option4 = 3.60f,
-        price_option5 = 3.00f, price_option6 = 4.30f, price_option7 = 1.80f, price_option8 = 3.50f, total_price = 0f, aux_total_price = 0f;
+        price_option5 = 3.00f, price_option6 = 4.30f, price_option7 = 1.80f, price_option8 = 3.50f, total_price = 0f,
+        aux_total_price = 0f;
 
     ArrayList<String> option_travel = new ArrayList<String>();
     option_travel.add("Ambato --> Quito");
@@ -156,10 +157,13 @@ public class BusTicketSales {
             }
           }
         }
-        /*while (reenterdata == JOptionPane.YES_OPTION)
-          ;
-        reenterdata = JOptionPane.showConfirmDialog(null, "¿Desea confirmar los datos ingresados?", "",
-            JOptionPane.YES_NO_OPTION);*/
+        /*
+         * while (reenterdata == JOptionPane.YES_OPTION)
+         * ;
+         * reenterdata = JOptionPane.showConfirmDialog(null,
+         * "¿Desea confirmar los datos ingresados?", "",
+         * JOptionPane.YES_NO_OPTION);
+         */
       } while (reenterdata == JOptionPane.YES_OPTION);
       do {
         try {
@@ -169,9 +173,11 @@ public class BusTicketSales {
                   "3. Tercera edad = -8% en su entrada \n4. Estudiantes = -5% en su entrada \n5. Persona con discapaciodad = -20% en su entrada\n\n ");
           choose_option_travel = Integer.parseInt(JOptionPane.showInputDialog(null,
               "Escoge una opción de viajes disponible: \n1." + option_travel.get(0) + " - $" + price_option1 + "\n2."
-                  + option_travel.get(1) + " - $" + price_option2 + "\n3." + option_travel.get(2) + " - $" + price_option3 + "\n4."
+                  + option_travel.get(1) + " - $" + price_option2 + "\n3." + option_travel.get(2) + " - $"
+                  + price_option3 + "\n4."
                   + option_travel.get(3) + " - $" + price_option4 + "\n5." + option_travel.get(4)
-                  + " - $" + price_option5 + "\n6." + option_travel.get(5) + " - $" + price_option6 + "\n7." + option_travel.get(6)
+                  + " - $" + price_option5 + "\n6." + option_travel.get(5) + " - $" + price_option6 + "\n7."
+                  + option_travel.get(6)
                   + " - $" + price_option7 + "\n8." + option_travel.get(7) + " - $"
                   + price_option8 + "\n\nIngrese el número de la opción que desea: "));
           if (choose_option_travel > 8 || choose_option_travel < 1) {
@@ -229,10 +235,12 @@ public class BusTicketSales {
           if (discapacity.get(i) == JOptionPane.YES_OPTION) {
             price_traveler_discount.add(((aux_total_price / travelers) * 0.2f));
             price_traveler_discount_total += price_traveler_discount.get(i);
-          } aux_total_price -= price_traveler_discount_total;
+          }
+          aux_total_price -= price_traveler_discount_total;
 
         }
-      } aux_total_price -= price_traveler_discount_total;
+      }
+      aux_total_price -= price_traveler_discount_total;
 
       JOptionPane.showMessageDialog(null, "Venta realizada");
       LocalDateTime endTimeFromBuy = LocalDateTime.now();
@@ -244,14 +252,25 @@ public class BusTicketSales {
 
       JOptionPane.showMessageDialog(null, "Tiempo de espera: " + (hours % 24) + " horas, " + (minutes % 60)
           + " minutos y " + (seconds % 60) + " segundos");
-      //Mostrar la factura de la compra indicando la fecha de la compra, fecha del viaje, destino, el numero de viajeros, nombres de viajeros, edad de viajeros, subtototal = (total_price*0.88), IVA = (total_price*0.12), Descuentos = price_traveler_discount_total, valor total = (aux_total_price*1.12)
+      // Mostrar la factura de la compra indicando la fecha de la compra, fecha del
+      // viaje, destino, el numero de viajeros, nombres de viajeros, edad de viajeros,
+      // subtototal = (total_price*0.88), IVA = (total_price*0.12), Descuentos =
+      // price_traveler_discount_total, valor total = (aux_total_price*1.12)
       name_travelers.toString();
-      JOptionPane.showMessageDialog(null, "Fecha de compra: " + purchaseStartTime.getDayOfMonth() + "/"
-          + purchaseStartTime.getMonthValue() + "/" + purchaseStartTime.getYear() + "\nFecha del viaje: "
-          + date + "\nDestino: "
-          + option_travel.get(choose_option_travel-1) + "\nNumero de viajeros: " + travelers + "\nNombres de viajeros: " + name_travelers + "\nEdad de viajeros: "
-          + age_travelers + "\nSubtotal: " + (total_price * 0.88) + "\nIVA: " + (total_price * 0.12)
-          + "\nDescuentos: " + price_traveler_discount_total + "\nValor total: " + (aux_total_price * 1.12));
+      JOptionPane.showMessageDialog(null, "******* FACTURA DEL CONSUMIDOR FINAL *******"
+          + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+          + "\n\nFecha de compra: " + purchaseStartTime.getDayOfMonth() + "/"
+          + purchaseStartTime.getMonthValue() + "/" + purchaseStartTime.getYear()
+          + "\nFecha del viaje: " + date
+          + "\nDestino: " + option_travel.get(choose_option_travel - 1)
+          + "\nNumero de viajeros: " + travelers
+          + "\n\nNombres de viajeros: " + name_travelers
+          + "\nEdad de viajeros: " + age_travelers
+          + "\n\nSubtotal: " + Math.round((total_price * 0.88) * 100.0) / 100.0
+          + "\nIVA: " + Math.round((total_price * 0.12) * 100.0) / 100.0
+          + "\nDescuentos: " + Math.round((price_traveler_discount_total) * 100.0) / 100.0
+          + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+          + "\n\nValor total: " + Math.round((aux_total_price * 1.12) * 100.0) / 100.0);
     }
 
     System.out.println("Hora actual: " + purchaseStartTime);
