@@ -75,10 +75,12 @@ public class BusTicketSales {
           JOptionPane.showMessageDialog(null, "La hora ingresada no es valida");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la hora del viaje?", "",
               JOptionPane.YES_NO_OPTION);
+              continue;
         } else if (minute > 59 || minute < 0) {
           JOptionPane.showMessageDialog(null, "Los minutos ingresados no son válidos");
           reenterdata = JOptionPane.showConfirmDialog(null, "¿Volver a ingresar la hora del viaje?", "",
               JOptionPane.YES_NO_OPTION);
+              continue;
         } else {
           reenterdata = 1;
         }
@@ -107,12 +109,15 @@ public class BusTicketSales {
       String last_name_travelers[] = new String[travelers];
       String age_travelers[] = new String[travelers];
       String id_travelers[] = new String[travelers];
+      int discapacity [] = new int[travelers];
       for (int i = 0; i < travelers; i++) {
         try {
           name_travelers[i] = JOptionPane.showInputDialog("Ingrese el nombre del viajero " + (i + 1) + ": ");
           last_name_travelers[i] = JOptionPane.showInputDialog("Ingrese el apellido del viajero " + (i + 1) + ": ");
           age_travelers[i] = JOptionPane.showInputDialog("Ingrese la edad del viajero " + (i + 1) + ": ");
           id_travelers[i] = JOptionPane.showInputDialog("Ingrese la cédula del viajero " + (i + 1) + ": ");
+          discapacity[i] = JOptionPane.showConfirmDialog(null,
+              "¿El viajero " + (i + 1) + " es discapacitado?", "", JOptionPane.YES_NO_OPTION);
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, "Error en los datos ingresados");
           i--;
@@ -127,9 +132,9 @@ public class BusTicketSales {
                   + " - $" + price_option5 + "\n6." + option_travel6 + " - $" + price_option6 + "\n7." + option_travel7
                   + " - $" + price_option7 + "\n8." + option_travel8 + " - $"
                   + price_option8
-                  + "\nLista de descuentos posibles: \n1. Más de 5 pasajeros = -15% al total \n2. Menores de 10 años = -10% en su entrada\n"
+                  + "\nLista de descuentos posibles: \n1. Más de 10 pasajeros = -15% al total \n2. Menores de 5 años = -10% en su entrada\n"
                   +
-                  "3. Tercera edad = -8% en su entrada \n4. Mujerez embarazadas = -5% en su entrada \n5. Persona con discapaciodad = -20% en su entrada\n\n Ingrese el número de la opción que desea: "));
+                  "3. Tercera edad = -8% en su entrada \n4. Estudiantes = -5% en su entrada \n5. Persona con discapaciodad = -20% en su entrada\n\n Ingrese el número de la opción que desea: "));
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, "Error en la opción de viaje ingresada");
           choose_option_travel = 0;
