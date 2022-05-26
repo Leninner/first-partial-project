@@ -44,7 +44,7 @@ public class StringMethods {
           break;
         case 3:
           JOptionPane.showMessageDialog(null,
-              "El método .contains es un método Java para verificar si String \ncontiene otra subcadena o no.Devuelve un valor booleano para que pueda\n usarse directamente dentro de sentencias if.\n Ejemplo:\n String str1 = 'En el libro hay un Ejemplo' \n if (str1.contains('ejemplo')) {\nSystem.out.println('La variable :ejemplo:  se encuentra en la cadena');\n} else {\nSystem.out.println(La variable :ejemplo: no se encuentra en la cadena')");
+              "El método .contains es un método Java para verificar si String \ncontiene otra subcadena o no.Devuelve un valor booleano para que pueda\n usarse directamente dentro de sentencias if.\n Ejemplo:\n String str1 = 'En el libro hay un Ejemplo' \n if (str1.contains('ejemplo')) {\nSystem.out.println('La variable :ejemplo:  se encuentra en la cadena');\n} else {\nSystem.out.println(La variable :ejemplo: no se encuentra en la cadena')\nLa variable :ejemplo: no se encuentra en la cadena");
           break;
         case 4:
           JOptionPane.showMessageDialog(null,
@@ -52,19 +52,19 @@ public class StringMethods {
           break;
         case 5:
           JOptionPane.showMessageDialog(null,
-              "El método .equals se utiliza para comparar dos objetos. Ojo no \nconfundir con el operador ==; se usa para saber si dos objetos son del \nmismo tipo y tienen los mismos datos. Nos dara el valor true si son\n iguales y false si no.\n Ejemplo:\n String date = 'siempre'\n String date2 = 'siempre'\n if(date.equals(dos)){\n System.out.println('Coinciden')}");
+              "El método .equals se utiliza para comparar dos objetos. Ojo no \nconfundir con el operador ==; se usa para saber si dos objetos son del \nmismo tipo y tienen los mismos datos. Nos dara el valor true si son\n iguales y false si no.\n Ejemplo:\n String date = 'siempre'\n String date2 = 'siempre'\n if(date.equals(dos)){\n System.out.println('Coinciden')}\n Coinciden");
           break;
         case 6:
           JOptionPane.showMessageDialog(null,
-              "El método .equalsIgnoreCase compara dos strings para ver si son \niguales ignorando las diferencias entre mayúsculas y minúsculas. Este \nmétodo es necesario porque no es posible comparar strings usando el \noperador de igualdad (==). Retorna true si los strings son iguales y\n false si no lo son.\n Ejemplo:\n String date = 'SieMpre'\nString date2 = 'siempre'\n if(date.equalsIgnoreCase(dos)==true){\n System.out.println('Coinciden sin importar la diferencia\n de mayúsculas o minúsculas')}");
+              "El método .equalsIgnoreCase compara dos strings para ver si son \niguales ignorando las diferencias entre mayúsculas y minúsculas. Este \nmétodo es necesario porque no es posible comparar strings usando el \noperador de igualdad (==). Retorna true si los strings son iguales y\n false si no lo son.\n Ejemplo:\n String date = 'SieMpre'\nString date2 = 'siempre'\n if(date.equalsIgnoreCase(dos)==true){\n System.out.println('Coinciden sin importar la diferencia\n de mayúsculas o minúsculas')}\nCoinciden sin importar la diferencia\n de mayúsculas o minúsculas");
           break;
         case 7:
           JOptionPane.showMessageDialog(null,
-              "El método .indexOf se usa para obtener el valor entero de un índice\n particular de objeto tipo String, en base a los criterios especificados\n en los parámetros del método IndexOf.\n Ejemplo:\n Strind date = 'Programacion'\n System.out.println(date.indexOf('P'))-> 0 \nSystem.out.println(date.indexOf('p'))-> -1 \n //0= posición \n //- 1= no existe ");
+              "El método .indexOf se usa para obtener el valor entero de un índice\n particular de objeto tipo String, en base a los criterios especificados\n en los parámetros del método IndexOf.\n Ejemplo:\n Strind date = 'Programacion'\n System.out.println(date.indexOf('P'))-> 0 \nSystem.out.println(date.indexOf('p'))-> -1 \n  \n //- 1= no existe ");
           break;
         case 8:
           JOptionPane.showMessageDialog(null,
-              "El método .lastIndexOf se utiliza para averiguar el índice de la última\n ocurrencia de un carácter o una subcadena en un String dado.\n Ejemplo:\n String date = 'Hola ingresa un numero'\n ");
+              "El método .lastIndexOf se utiliza para averiguar el índice de la última\n ocurrencia de un carácter o una subcadena en un String dado.\n Ejemplo:\n String date = 'caminando con C'\n System.out.println(date.lastIndexOf(str:'c'))\n 14 ");
           break;
         case 9:
           JOptionPane.showMessageDialog(null,
@@ -96,7 +96,7 @@ public class StringMethods {
           break;
         case 16:
           JOptionPane.showMessageDialog(null,
-              "El método .split se utiliza para dividir una cadena en función del carácter\n especificado. Es un método de clase String y devuelve un array de cadena \ndespués de escupir la cadena. Podemos acceder más a cada \ncadena del array utilizando su valor de índice.\n Ejemplo:\n");
+              "El método .split se utiliza para dividir una cadena en función del carácter\n especificado. Es un método de clase String y devuelve un array de cadena \ndespués de escupir la cadena. Podemos acceder más a cada \ncadena del array utilizando su valor de índice.\n Ejemplo:\n String date = 'hola / bienvenido / a / java'\nString []partes = date.split('/')\n for (int i = 0; i < partes.length;i++){\nSystem.out.println (parte[i])}\n hola \n bienvenido \n a \n java");
           break;
         case 17:
           exit = true;
