@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
@@ -48,7 +49,6 @@ public class BusinessLogistics {
    * Son todos los paquetes que pesan hasta 50 kilogramos y hasta USD $2.000 que
    * no entren en ninguna otra categoría.
    * Esta categoría si paga impuestos:
-   * - Advalorem: el porcentaje dependerá del producto
    * - IVA: 12%
    * - Fodinfa: 0.5%.
    * 
@@ -81,7 +81,8 @@ public class BusinessLogistics {
 
   void manageBusinessLogistics() {
     LocalDateTime startWorkTime = LocalDateTime.now();
-    int totalPackages = 0;
+    int totalApprovedPackages = 0;
+    int totalRejectedPackages = 0;
     String customerName = "";
     String customerId = "";
     String shippingDestination = "";
@@ -96,164 +97,287 @@ public class BusinessLogistics {
     String packageCode = generatePackageCode();
 
     // Regex para validaciones
-    // regez para validar nombre y apellido del cliente que permita espacios
+    // regex para validar nombre y apellido del cliente que permita espacios
     // entre palabras
     String regexName = "^[a-zA-Z\\s]+$";
     String regexCedula = "^[0-9]*$";
     String regexDate = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
 
+    final double IVA = 0.15, Fodinfa = 0.05, advalorem = 0.1, especifico = 5.5;
+
     JOptionPane.showMessageDialog(null,
-        "Bienevenido al Sistema de Courier\nEmpezamos ingresando los datos del paquete");
+        "* * * * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nBienvenido al Sistema de envíos de Cool Courier\n"
+            + "* * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
     do {
       // Petición de datos del cliente junto con validaciones
+      // do {
+      // customerName = JOptionPane.showInputDialog("Ingrese el nombre del
+      // comprador");
 
-      do {
-        customerName = JOptionPane.showInputDialog("Ingrese el nombre del comprador");
+      // if (customerName.trim().isEmpty()) {
+      // JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+      // continue;
+      // }
 
-        if (customerName.trim().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
-          continue;
-        }
+      // if (!customerName.matches(regexName)) {
+      // JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
+      // continue;
+      // }
+      // } while (customerName.matches(regexName) == false ||
+      // customerName.trim().isEmpty());
 
-        if (!customerName.matches(regexName)) {
-          JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
-          continue;
-        }
-      } while (customerName.matches(regexName) == false || customerName.trim().isEmpty());
+      // do {
+      // customerId = JOptionPane.showInputDialog("Ingrese el número de cédula del
+      // comprador");
 
-      do {
-        customerId = JOptionPane.showInputDialog("Ingrese el numero de cedula del comprador");
+      // if (customerId.trim().isEmpty()) {
+      // JOptionPane.showMessageDialog(null, "El numero de cedula no puede estar
+      // vacío");
+      // continue;
+      // }
 
-        if (!customerId.matches(regexCedula)) {
-          JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo numeros");
-        }
+      // if (!customerId.matches(regexCedula) || customerId.length() != 10) {
+      // JOptionPane.showMessageDialog(null, "El numero de cedula debe contener solo
+      // números. Y solo 10 dígitos");
+      // continue;
+      // }
 
-        if (customerId.trim().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "El numero de cedula no puede estar vacío");
-        }
-      } while (customerId.matches(regexCedula) == false || customerId.trim().isEmpty());
+      // } while (!customerId.matches(regexCedula) || customerId.trim().isEmpty());
 
-      do {
-        shippingDestination = JOptionPane.showInputDialog("Ingrese el destino del paquete");
+      // do {
+      // shippingDestination = JOptionPane.showInputDialog("Ingrese el destino de
+      // envío del paquete");
 
-        if (shippingDestination.trim().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "El campo del destino no puede estar vacio");
-        }
-      } while (shippingDestination.trim().isEmpty());
+      // if (shippingDestination.trim().isEmpty()) {
+      // JOptionPane.showMessageDialog(null, "El campo del destino de envío no puede
+      // estar vacio");
+      // }
+      // } while (shippingDestination.trim().isEmpty());
 
-      customerPhone = JOptionPane.showInputDialog("Ingrese el numero de telefono del comprador");
-      customerEmail = JOptionPane.showInputDialog("Ingrese el correo electronico del comprador");
-      storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el paquete");
+      // customerPhone = JOptionPane.showInputDialog("Ingrese el número de telefono
+      // del comprador");
+      // customerEmail = JOptionPane.showInputDialog("Ingrese el e-mail del
+      // comprador");
+      // storeName = JOptionPane.showInputDialog("Ingrese la tienda que vende el
+      // paquete");
 
-      do {
-        purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del paquete");
+      // do {
+      // purchaseDate = JOptionPane.showInputDialog("Ingrese la fecha de compra del
+      // paquete (YYYY-MM-DD)");
 
-        if (!purchaseDate.matches(regexDate)) {
-          JOptionPane.showMessageDialog(null, "La fecha debe tener el formato YYYY-MM-DD");
-        }
-      } while (purchaseDate.matches(regexDate) == false);
+      // if (!purchaseDate.matches(regexDate)) {
+      // JOptionPane.showMessageDialog(null, "La fecha debe tener el formato
+      // YYYY-MM-DD");
+      // }
+      // } while (!purchaseDate.matches(regexDate));
 
       boolean error = false;
 
       do {
 
         do {
-          weight = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso del paquete en kilogramos"));
+          try {
+            weight = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso del paquete en kilogramos"));
 
-          if (weight <= 0) {
-            JOptionPane.showMessageDialog(null, "El peso debe ser mayor a 0 y no puede estar vacío");
-            continue;
-          }
-        } while (weight <= 0);
-
-        do {
-          price = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del paquete"));
-
-          if (price <= 0) {
-            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
-            continue;
-          }
-        } while (price <= 0);
-
-        do {
-          productType = JOptionPane.showInputDialog("Ingrese el tipo de producto que tiene la carga");
-
-          if (productType.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El tipo de producto no puede estar vacio");
-            continue;
-          }
-        } while (productType.trim().isEmpty());
-
-        shippingType = Integer
-            .parseInt(
-                JOptionPane.showInputDialog("Selecciona la categoria del paquete\n1 -> A\n2 -> B\n3 -> C\n4 -> D"));
-
-        error = false;
-
-        switch (shippingType) {
-          case 1:
-            if (!productType.toUpperCase().contains("DOCUMENTOS")) {
-              JOptionPane.showMessageDialog(null,
-                  "El tipo de producto en la categoría A admite solo documentos. Intenta de nuevo");
-              error = true;
+            if (weight <= 0) {
+              JOptionPane.showMessageDialog(null, "El campo del peso del paquete debe ser mayor a 0");
+              continue;
             }
 
-            break;
-
-          case 2:
-            if (price > 400 || weight > 4) {
-              JOptionPane.showMessageDialog(null,
-                  "El precio del paquete no puede ser mayor a 400 y el peso no puede ser mayor a 4. Prueba usando la categoría C");
-              error = true;
-            }
-
-            break;
-
-          case 3:
-            if (price > 2000 || weight > 50) {
-              JOptionPane.showMessageDialog(null,
-                  "El precio del paquete no puede ser mayor a $2000 y el peso no puede ser mayor a 50 kg");
-              error = true;
-            }
-
-            break;
-
-          case 4:
-
-            if (price > 2000 || weight > 20) {
-              JOptionPane.showMessageDialog(null,
-                  "El precio del paquete no puede ser mayor a $2000 y el peso no puede ser mayor a 20 kg. Reingresa los datos");
-              error = true;
-            }
-
-            if (!productType.toUpperCase().contains("ROPA")) {
-              JOptionPane.showMessageDialog(null,
-                  "El tipo de producto en la categoría D admite solo ropa y calzado. Intenta de nuevo");
-              error = true;
-            }
-
-            break;
-
-          default:
-            JOptionPane.showMessageDialog(null, "La opción seleccionada no es valida");
+            error = false;
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El campo del peso del paquete debe ser un número");
             error = true;
+          }
+        } while (weight <= 0 || error);
 
-            break;
-        }
+        do {
+          try {
+            price = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del paquete"));
 
-      } while (error == true);
+            if (price <= 0) {
+              JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
+            }
 
-      totalPackages++;
+            error = false;
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El precio debe ser un número");
+            error = true;
+          }
+        } while (price <= 0 || error);
 
-      // TODO: Crear una forma de mostrar la factura con JOoptionPane
+        boolean productTypeError = false;
 
-      JOptionPane.showMessageDialog(null, "La factura del paquete es la siguiente:\n" + "Nombre del comprador: "
-          + customerName + "\nNumero de cedula: " + customerId + "\nE-mail: " + customerEmail + "\nTelefono: "
-          + customerPhone + "\nDestino del paquete: " + shippingDestination
-          + "\nPeso del paquete: " + (weight * 2.2) + " lbs\nPrecio del paquete: $" + price + "\nTipo de producto: "
-          + productType + "\nCategoria del paquete: " + shippingType + "\nFecha de compra: " + purchaseDate
-          + "\nCódigo de seguimiento: " + packageCode + "\n\n*** Gracias por su compra ***");
+        do {
+          try {
+            productType = JOptionPane.showInputDialog("Ingrese el tipo de producto que tiene la carga" + "\n"
+                + "1. Documentos" + "\n" + "2. Ropa/Calzado" + "\n" + "3. Otros");
+
+            if (Integer.parseInt(productType) < 1 || Integer.parseInt(productType) > 3) {
+              JOptionPane.showMessageDialog(null, "El tipo de producto debe ser un número entre 1 y 3");
+              productTypeError = true;
+              continue;
+            }
+
+            if (productType.trim().isEmpty()) {
+              JOptionPane.showMessageDialog(null, "El tipo de producto no puede estar vacio");
+              continue;
+            }
+
+            productTypeError = false;
+            if (productType.equals("1")) {
+              productType = "Documentos";
+            } else if (productType.equals("2")) {
+              productType = "Ropa/Calzado";
+            } else {
+              productType = "Otros";
+            }
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El tipo de producto debe ser un número entre 1 y 3");
+            productTypeError = true;
+          }
+
+        } while (productType.trim().isEmpty() || productTypeError);
+
+        do {
+          try {
+            shippingType = Integer
+                .parseInt(
+                    JOptionPane
+                        .showInputDialog(
+                            "Selecciona la categoría del paquete\n1 -> A" + "\n2 -> B"
+                                + "\n3 -> C\n4 -> D\n"
+                                + "\nPara más información visita https://www.aduana.gob.ec/envios-courier-postal/"));
+
+            if (shippingType < 1 || shippingType > 4) {
+              JOptionPane.showMessageDialog(null, "El tipo de envío debe ser un número entre 1 y 4");
+              error = true;
+              continue;
+            }
+
+            // Confirmación de datos del paquete
+
+            int isCorrectPackageInformation = JOptionPane.showConfirmDialog(null,
+                "¿Los siguientes datos están correctos?" + "\n" + "\n" + "Peso del paquete: " + weight + "kg\n"
+                    + "Precio del paquete: $" + price + "\n" + "Tipo de producto: " + productType + "\n" + "Categoría: "
+                    + shippingType,
+                "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (isCorrectPackageInformation == JOptionPane.NO_OPTION) {
+              JOptionPane.showMessageDialog(null, "Reingrese los datos");
+              error = true;
+              break;
+            }
+
+            error = false;
+
+            switch (shippingType) {
+              case 1:
+                if (!productType.toUpperCase().contains("DOCUMENTOS")) {
+                  JOptionPane.showMessageDialog(null,
+                      "El tipo de producto en la categoría A admite solo documentos y tu carga contiene" + "\n"
+                          + "\n->" + productType
+                          + "\n\n*** Paquete rechazado ***");
+
+                  totalRejectedPackages++;
+                } else {
+                  JOptionPane.showMessageDialog(null,
+                      "El paquete fue aprovado");
+                  new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
+                      weight, price);
+
+                  totalApprovedPackages++;
+                }
+
+                break;
+
+              case 2:
+                if (price > 400 || weight > 4) {
+                  JOptionPane.showMessageDialog(null,
+                      "El precio del paquete en categoría B no puede ser mayor a 400 y el peso no puede ser mayor a 4."
+                          + "\nTu paquete tiene la siguiente información:"
+                          + "\n\n-> Peso: " + weight + "kg" + "\n-> Precio: $" + price
+                          + "\n\n***  Paquete rechazado  ***");
+
+                  totalRejectedPackages++;
+                } else {
+                  JOptionPane.showMessageDialog(null,
+                      "El paquete fue aprovado");
+                  new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
+                      weight,
+                      price);
+
+                  totalApprovedPackages++;
+                }
+
+                break;
+
+              case 3:
+                if (price > 2000 || weight > 50) {
+                  JOptionPane.showMessageDialog(null,
+                      "El precio del paquete no puede ser mayor a $2000 y el peso no puede ser mayor a 50 kg."
+                          + "\n\nTu paquete tiene la siguiente información:"
+                          + "\n-> Peso: " + weight + "kg"
+                          + "\n-> Precio: $" + price
+                          + "\n\n***  Paquete rechazado  ***");
+
+                  totalRejectedPackages++;
+                } else {
+                  JOptionPane.showMessageDialog(null,
+                      "El paquete fue aprovado");
+                  new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
+                      weight,
+                      price, IVA, Fodinfa);
+
+                  totalApprovedPackages++;
+                }
+
+                break;
+
+              case 4:
+
+                if (price > 2000 || weight > 20) {
+                  JOptionPane.showMessageDialog(null,
+                      "El precio del paquete no puede ser mayor a $2000 y el peso no puede ser mayor a 20 kg."
+                          + "\n\nTu paquete tiene la siguiente información:"
+                          + "\n-> Peso: " + weight + "kg"
+                          + "\n-> Precio: $" + price
+                          + "\n\n***  Paquete rechazado  ***");
+
+                  totalRejectedPackages++;
+                } else if (!productType.toUpperCase().contains("ROPA")) {
+                  JOptionPane.showMessageDialog(null,
+                      "El tipo de producto en la categoría D admite solo ropa y calzado. Tu carga contiene"
+                          + "\n\n->" + productType
+                          + "\n\n*** Paquete rechazado ***");
+
+                  totalRejectedPackages++;
+                } else {
+                  JOptionPane.showMessageDialog(null,
+                      "El paquete fue aprovado");
+                  new BusinessLogistics().showInvoice(customerName, customerId, packageCode, productType, shippingType,
+                      weight,
+                      price, IVA, Fodinfa, advalorem, especifico);
+
+                  totalApprovedPackages++;
+                }
+
+                break;
+
+              default:
+                JOptionPane.showMessageDialog(null, "La categoría seleccionada no es valida. Intenta de nuevo");
+                error = true;
+                break;
+            }
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El tipo de envío debe ser un número entre 1 y 4");
+            error = true;
+          }
+        } while (error);
+
+      } while (error);
 
       int endOfWorkDay = JOptionPane.showConfirmDialog(null, "¿Deseas ingresar la información de otro paquete?",
           "Continuar", JOptionPane.YES_NO_OPTION);
@@ -268,8 +392,8 @@ public class BusinessLogistics {
         long totalTime = ChronoUnit.MINUTES.between(startWorkTime, endWorkTime);
 
         JOptionPane.showMessageDialog(null,
-            "El tiempo total de trabajo es de: " + totalTime + " minutos. \n"
-                + "El total de paquetes procesados es de: " + totalPackages + " paquetes.");
+            "El tiempo total de trabajo es de: " + totalTime + " minutos."
+                + "\nEl total de paquetes procesados es de: " + totalApprovedPackages + " paquetes.");
 
         break;
       }
@@ -285,5 +409,65 @@ public class BusinessLogistics {
     }
 
     return packageCode;
+  }
+
+  // Sobrecarga de métodos para controlar los parámetros opcionales
+
+  void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
+      double weight, double price) {
+
+    JOptionPane.showMessageDialog(null,
+        "***  Factura  ***" + "\n\n"
+            + "* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nNombre: " + customerName
+            + "\nCédula: " + customerId
+            + "\n\nCódigo del paquete: " + packageCode
+            + "\nTipo de producto: " + productType
+            + "\nTipo de envío: " + shippingType
+            + "\nPeso del paquete: " + weight + "kg"
+            + "\n\nIVA: 0%"
+            + "\nSubtotal: $" + (price)
+            + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nPrecio Total: $" + (price));
+  }
+
+  void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
+      double weight, double price, double IVA, double Fodinfa) {
+
+    JOptionPane.showMessageDialog(null,
+        "***  Factura ***" + "\n\n"
+            + "* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nNombre: " + customerName
+            + "\nCédula: " + customerId
+            + "\n\nCódigo del paquete: " + packageCode
+            + "\nTipo de producto: " + productType
+            + "\nTipo de envío: " + shippingType
+            + "\nPeso del paquete: " + weight + "kg"
+            + "\n\nIVA: " + (IVA * 100) + "%"
+            + "\nFodinfa: " + (Fodinfa * 100) + "%"
+            + "\nSubtotal: $" + (price)
+            + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nPrecio Total: $" + (price + IVA + Fodinfa));
+  }
+
+  void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
+      double weight, double price, double IVA, double Fodinfa, double advalorem, double especifico) {
+
+    JOptionPane.showMessageDialog(null,
+        "***  Factura ***" + "\n\n"
+            + "* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nNombre: " + customerName
+            + "\nCédula: " + customerId
+            + "\n\nCódigo del paquete: " + packageCode
+            + "\nTipo de producto: " + productType
+            + "\nTipo de envío: " + shippingType
+            + "\nPeso del paquete: " + (weight * 2.2) + "lb"
+            + "\n\nIVA: " + (IVA * 100) + "%"
+            + "\nFodinfa: " + (Fodinfa * 100) + "%"
+            + "\nAdvalorem: " + (advalorem * 100) + "%"
+            + "\nEspecífico: $" + (especifico) + " por kg"
+            + "\nSubtotal: $" + (price)
+            + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
+            + "\nPrecio Total: $" + (price + IVA + Fodinfa + advalorem + (especifico * weight)));
   }
 }
