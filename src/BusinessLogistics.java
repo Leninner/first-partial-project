@@ -2,20 +2,6 @@ import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
 public class BusinessLogistics {
-  /**
-   * - El sistema debe generar un código de seguimiento que será un **código** de
-   * 10 dígitos, el cual debe ser único.
-   * 
-   * - Al finalizar, se debe mostrar el resumen de la información, con los costos
-   * de envío totales, el valor total de la compra, el valor total de los
-   * impuestos, el valor total de los descuentos, el valor total de la compra con
-   * impuestos y descuentos, el tiempo de envío.
-   * 
-   * - También, cuando el encargado termine su día de trabajo, se le debe mostrar
-   * el tiempo total de trabajo y el total de paquetes procesados bajo cada
-   * categoría.
-   */
-
   void manageBusinessLogistics() {
     final double IVA = 0.15, Fodinfa = 0.05, advalorem = 0.1, especifico = 5.5;
 
