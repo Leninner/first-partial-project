@@ -34,15 +34,62 @@ Elaborar un programa que contenga un menú con 4 opciones, de acuerdo al siguien
 
   - Mostrar el número de viajeros, el mayor descuento aplicado y el tiempo de compra expresada en minutos. Se recomienda utilizar printf para la impresión de resultados.
 
-- **Opción 3:** Aplicación de un tema libre a su elección, el cual será valorado de acuerdo a la originalidad, esfuerzo realizado en el mismo y uso de estructuras revisadas en clase (Similar a la Opción 2)
+- **Opción 3:** Aplicación de Courier para gestionar los envíos de paquetes.
 
-  - Opciones
-    - Sistema de calificaciones
-    - Sistema de logística de productos
-    - Sistema de inventario
-    - Sistema de ventas
-    - Sistema de facturación
-    - Sistema de control de ligas deportivas
+  El sistema debe permitir la gestión de paquetes, que debe cumplir los siguientes requerimientos:
+
+  - El sistema de iniciar preguntando al encargado sobre los siguientes parámetros de cada paquete:
+
+    - Destino de envío
+    - Peso de la carga, en Kg
+    - Tienda que vende
+    - Fecha de compra
+    - Precio antes del envío
+    - Tipo de productos que contiene (requerido)
+
+    - Información del comprador:
+
+      - Nombres y Apellidos (Requerido)
+      - Cédula (Requerido)
+      - Dirección (Opcional)
+      - Teléfono (Opcional)
+      - Correo Electrónico (Opcional)
+
+    - Tipo de envío (Requerido)
+
+  - El sistema tiene que validar que todos los datos estén de acuerdo con lo solicitado:
+
+        - Se debe controlar que el paquete esté en concordancia con el tipo de envío que se está aplicando.
+
+          - **Categoría A:** Documentos
+            Esta categoría está libre de impuestos y no requiere ningún documento de control previo a la importación.
+
+          - **Categoría B:** 4 x 4
+            Son todos los paquetes que pesan hasta 4 kilogramos y hasta USD$400, usado únicamente por personas naturales.
+
+          - **Categoría C:** 50 Kg $2000
+            Son todos los paquetes que pesan hasta 50 kilogramos y hasta USD $2.000 que no entren en ninguna otra categoría.
+            Esta categoría si paga impuestos:
+              - Advalorem: el porcentaje dependerá del producto
+              - IVA: 12%
+              - Fodinfa: 0.5%.
+
+          - **Categoría D:** Textiles y Calzados
+            El precio no puede excederse a los 20 kg ni el valor sobrepasar los US$ 2.000,00
+
+            Esta categoría paga estos impuestos:
+              - Advalorem: 10%
+              - Específico: $5.5 por cada Kg de ropa, en el caso de calzado $6,00 por cada par de zapato.|
+              - IVA: 12%
+              - Fodinfa: 0.5%
+
+  - El sistema debe retornar un mensaje de error en caso de que alguno de los datos no cumpla con lo solicitado y volver a solicitar el dato erroneo
+
+  - El sistema debe generar un código de seguimiento que será un **código** de 10 dígitos, el cual debe ser único.
+
+  - Al finalizar, se debe mostrar el resumen de la información, con los costos de envío totales, el valor total de la compra, el valor total de los impuestos, el valor total de los descuentos, el valor total de la compra con impuestos y descuentos, el tiempo de envío.
+
+  - También, cuando el encargado termine su día de trabajo, se le debe mostrar el tiempo total de trabajo y el total de paquetes procesados bajo cada categoría.
 
 - **Opción 4:** Salir.
 
