@@ -102,6 +102,7 @@ public class StringMethods {
           exit = true;
           break;
         default:
+        JOptionPane.showMessageDialog(null, "La opción ingresada no existe, ingresa una opción correcta");
           break;
       }
     } while (!exit);
