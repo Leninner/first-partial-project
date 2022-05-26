@@ -27,6 +27,7 @@ public class BusinessLogistics {
     double price = 0;
     int shippingType = 0;
 
+    // Variables de tipo string utilizadas
     String customerName = "";
     String customerId = "";
     String shippingDestination = "";
@@ -38,8 +39,6 @@ public class BusinessLogistics {
     String packageCode = generatePackageCode();
 
     // Regex para validaciones
-    // regex para validar nombre y apellido del cliente que permita espacios
-    // entre palabras
     String regexName = "^[a-zA-Z\\s]+$";
     String regexCedula = "^[0-9]*$";
     String regexDate = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
@@ -331,10 +330,11 @@ public class BusinessLogistics {
     } while (true);
   }
 
+  // Método para obtener un código de paquete aleatorio único
   String generatePackageCode() {
     String packageCode = "";
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 10; i++) {
       int randomNumber = (int) (Math.random() * 10);
       packageCode += randomNumber;
     }
@@ -343,8 +343,6 @@ public class BusinessLogistics {
   }
 
   // Sobrecarga de métodos para controlar los parámetros opcionales
-
-  // shippingDestination, customerPhone, customerEmail, storeName, purchaseDate
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
       double weight, double price, String shippingDestination, String customerPhone, String customerEmail,
       String storeName, String purchaseDate) {
@@ -364,9 +362,9 @@ public class BusinessLogistics {
             + "\nTipo de envío: " + shippingType
             + "\nPeso del paquete: " + Math.round((weight * 2.2) * 100.0) / 100.0 + " lb"
             + "\n\nIVA: 0%"
-            + "\nSubtotal: $" + (price)
+            + "\nSubtotal: $" + Math.round((price) * 100.0) / 100.0
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
-            + "\nPrecio Total: $" + (price));
+            + "\nPrecio Total: $" + (Math.round((price) * 100.0) / 100.0));
   }
 
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
@@ -390,9 +388,9 @@ public class BusinessLogistics {
             + "\nPeso del paquete: " + Math.round((weight * 2.2) * 100.0) / 100.0 + " lb"
             + "\n\nIVA: " + (IVA * 100) + "%"
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
-            + "\nSubtotal: $" + (price)
+            + "\nSubtotal: $" + (Math.round((price) * 100.0) / 100.0)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
-            + "\nPrecio Total: $" + (price + (IVA * price) + (Fodinfa * price)));
+            + "\nPrecio Total: $" + Math.round(((price + (IVA * price) + (Fodinfa * price))) * 100.0) / 100.0);
   }
 
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
@@ -418,9 +416,11 @@ public class BusinessLogistics {
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
             + "\nAdvalorem: " + (advalorem * 100) + "%"
             + "\nEspecífico: $" + (especifico) + " por kg"
-            + "\nSubtotal: $" + (price)
+            + "\nSubtotal: $" + (Math.round((price) * 100.0) / 100.0)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
             + "\nPrecio Total: $"
-            + (price + (IVA * price) + (Fodinfa * price) + (advalorem * price) + (especifico * weight)));
+            + Math.round(
+                ((price + (IVA * price) + (Fodinfa * price) + (advalorem * price) + (especifico * weight))) * 100.0)
+                / 100.0);
   }
 }
