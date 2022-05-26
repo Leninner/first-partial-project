@@ -362,7 +362,7 @@ public class BusinessLogistics {
             + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
+            + "\nPeso del paquete: " + Math.round((weight * 2.2) * 100.0) / 100.0 + " lb"
             + "\n\nIVA: 0%"
             + "\nSubtotal: $" + (price)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
@@ -387,12 +387,12 @@ public class BusinessLogistics {
             + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
+            + "\nPeso del paquete: " + Math.round((weight * 2.2) * 100.0) / 100.0 + " lb"
             + "\n\nIVA: " + (IVA * 100) + "%"
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
             + "\nSubtotal: $" + (price)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
-            + "\nPrecio Total: $" + (price + IVA + Fodinfa));
+            + "\nPrecio Total: $" + (price + (IVA * price) + (Fodinfa * price)));
   }
 
   void showInvoice(String customerName, String customerId, String packageCode, String productType, int shippingType,
@@ -413,13 +413,14 @@ public class BusinessLogistics {
             + "\nDirección de envío: " + shippingDestination
             + "\nTipo de producto: " + productType
             + "\nTipo de envío: " + shippingType
-            + "\nPeso del paquete: " + (weight * 2.2) + " lb"
+            + "\nPeso del paquete: " + Math.round((weight * 2.2) * 100.0) / 100.0 + " lb"
             + "\n\nIVA: " + (IVA * 100) + "%"
             + "\nFodinfa: " + (Fodinfa * 100) + "%"
             + "\nAdvalorem: " + (advalorem * 100) + "%"
             + "\nEspecífico: $" + (especifico) + " por kg"
             + "\nSubtotal: $" + (price)
             + "\n\n* * * * * * * * * * * * * * * * * * * * * * * * *"
-            + "\nPrecio Total: $" + (price + IVA + Fodinfa + advalorem + (especifico * weight)));
+            + "\nPrecio Total: $"
+            + (price + (IVA * price) + (Fodinfa * price) + (advalorem * price) + (especifico * weight)));
   }
 }
